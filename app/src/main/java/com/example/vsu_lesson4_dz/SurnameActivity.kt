@@ -19,6 +19,10 @@ class SurnameActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        var name : String? = null
+        intent.extras?.let {screenData ->
+            name = screenData.getString("NAME")
+        }
         findViewById<Button>(R.id.buttonBack).setOnClickListener {
             finish()
         }
@@ -27,7 +31,7 @@ class SurnameActivity : AppCompatActivity() {
         }
         findViewById<Button>(R.id.buttonConfirm).setOnClickListener {
             val newIntent : Intent = Intent(this, AgeActivity::class.java)
-            newIntent.putExtra("NAME", intent.getStringExtra("NAME"))
+            newIntent.putExtra("NAME", name)
             newIntent.putExtra("SURNAME", findViewById<TextInputEditText>(R.id.surnameInput).text)
             startActivity(newIntent)
         }

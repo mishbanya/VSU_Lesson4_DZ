@@ -20,6 +20,12 @@ class AgeActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        var name : String? = null
+        var surname : String? = null
+        intent.extras?.let {screenData ->
+            name = screenData.getString("NAME")
+            surname = screenData.getString("SURNAME")
+        }
         findViewById<Button>(R.id.buttonBack).setOnClickListener {
             finish()
         }
@@ -27,7 +33,7 @@ class AgeActivity : AppCompatActivity() {
             finishAffinity()
         }
         findViewById<Button>(R.id.buttonConfirm).setOnClickListener {
-            Toast.makeText(this, intent.getStringExtra("NAME") + " " + intent.getStringExtra("SURNAME") + " " +  findViewById<TextInputEditText>(R.id.ageInput).text, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, name + " " + surname + " " +  findViewById<TextInputEditText>(R.id.ageInput).text, Toast.LENGTH_SHORT).show()
         }
     }
 }
