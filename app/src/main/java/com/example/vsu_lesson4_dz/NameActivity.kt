@@ -44,9 +44,14 @@ class NameActivity : AppCompatActivity() {
             }
         }
         findViewById<Button>(R.id.buttonConfirm).setOnClickListener {
-            val newIntent : Intent = Intent(this, SurnameActivity::class.java)
-            newIntent.putExtra("NAME", findViewById<TextInputEditText>(R.id.nameInput).text.toString())
-            startForResultLauncher.launch(newIntent)
+            val nameInput = findViewById<TextInputEditText>(R.id.nameInput).text.toString()
+            if (nameInput.isNotBlank()) {
+                val newIntent = Intent(this, SurnameActivity::class.java)
+                newIntent.putExtra("NAME", nameInput)
+                startForResultLauncher.launch(newIntent)
+            } else {
+                Toast.makeText(this, "Введите имя", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

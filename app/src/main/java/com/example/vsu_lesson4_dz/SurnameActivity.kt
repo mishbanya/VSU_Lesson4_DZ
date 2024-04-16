@@ -3,6 +3,7 @@ package com.example.vsu_lesson4_dz
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -46,10 +47,14 @@ class SurnameActivity : AppCompatActivity() {
             }
         }
         findViewById<Button>(R.id.buttonConfirm).setOnClickListener {
-            val newIntent : Intent = Intent(this, AgeActivity::class.java)
-            newIntent.putExtra("NAME", name)
-            newIntent.putExtra("SURNAME", findViewById<TextInputEditText>(R.id.surnameInput).text.toString())
-            startForResultLauncher.launch(newIntent)
+            val surnameInput = findViewById<TextInputEditText>(R.id.surnameInput).text.toString()
+            if (surnameInput.isNotBlank()) {
+                val newIntent = Intent(this, AgeActivity::class.java)
+                newIntent.putExtra("SURNAME", surnameInput)
+                startForResultLauncher.launch(newIntent)
+            } else {
+                Toast.makeText(this, "Введите фамилию", Toast.LENGTH_SHORT).show()
+            }
         }
 
     }
