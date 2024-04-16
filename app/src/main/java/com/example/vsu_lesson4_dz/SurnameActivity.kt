@@ -21,7 +21,7 @@ class SurnameActivity : AppCompatActivity() {
         }
         var name : String? = null
         intent.extras?.let {screenData ->
-            name = screenData.getString("NAME")
+            name = screenData.getString("NAME").toString()
         }
         findViewById<Button>(R.id.buttonBack).setOnClickListener {
             finish()
@@ -32,7 +32,7 @@ class SurnameActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonConfirm).setOnClickListener {
             val newIntent : Intent = Intent(this, AgeActivity::class.java)
             newIntent.putExtra("NAME", name)
-            newIntent.putExtra("SURNAME", findViewById<TextInputEditText>(R.id.surnameInput).text)
+            newIntent.putExtra("SURNAME", findViewById<TextInputEditText>(R.id.surnameInput).text.toString())
             startActivity(newIntent)
         }
 

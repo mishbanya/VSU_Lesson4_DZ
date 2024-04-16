@@ -3,6 +3,7 @@ package com.example.vsu_lesson4_dz
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -27,7 +28,7 @@ class NameActivity : AppCompatActivity() {
         }
         findViewById<Button>(R.id.buttonConfirm).setOnClickListener {
             val newIntent : Intent = Intent(this, SurnameActivity::class.java)
-            newIntent.putExtra("NAME", findViewById<TextInputEditText>(R.id.nameInput).text)
+            newIntent.putExtra("NAME", findViewById<TextInputEditText>(R.id.nameInput).text.toString())
             startActivity(newIntent)
         }
     }

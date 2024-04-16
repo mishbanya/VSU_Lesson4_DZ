@@ -23,8 +23,8 @@ class AgeActivity : AppCompatActivity() {
         var name : String? = null
         var surname : String? = null
         intent.extras?.let {screenData ->
-            name = screenData.getString("NAME")
-            surname = screenData.getString("SURNAME")
+            name = screenData.getString("NAME").toString()
+            surname = screenData.getString("SURNAME").toString()
         }
         findViewById<Button>(R.id.buttonBack).setOnClickListener {
             finish()
@@ -33,7 +33,7 @@ class AgeActivity : AppCompatActivity() {
             finishAffinity()
         }
         findViewById<Button>(R.id.buttonConfirm).setOnClickListener {
-            Toast.makeText(this, name + " " + surname + " " +  findViewById<TextInputEditText>(R.id.ageInput).text, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, name + " " + surname + " " +  findViewById<TextInputEditText>(R.id.ageInput).text.toString(), Toast.LENGTH_SHORT).show()
         }
     }
 }
