@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -26,10 +27,26 @@ class NameActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonCancel).setOnClickListener {
             finishAffinity()
         }
+        val startForResultLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val name : String = result.data?.getStringExtra("NAME").toString()
+                val surname : String = result.data?.getStringExtra("SURNAME").toString()
+                val age : String = result.data?.getStringExtra("AGE").toString()
+                val resultIntent = Intent().apply {
+                    putExtra("NAME", name)
+                    putExtra("SURNAME", surname)
+                    putExtra("AGE", age)
+                }
+                setResult(RESULT_OK, resultIntent)
+                finish()
+            }
+        }
         findViewById<Button>(R.id.buttonConfirm).setOnClickListener {
             val newIntent : Intent = Intent(this, SurnameActivity::class.java)
             newIntent.putExtra("NAME", findViewById<TextInputEditText>(R.id.nameInput).text.toString())
-            startActivity(newIntent)
+            startForResultLauncher.launch(newIntent)
         }
     }
 }

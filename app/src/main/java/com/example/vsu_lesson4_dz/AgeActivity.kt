@@ -33,7 +33,14 @@ class AgeActivity : AppCompatActivity() {
             finishAffinity()
         }
         findViewById<Button>(R.id.buttonConfirm).setOnClickListener {
-            Toast.makeText(this, name + " " + surname + " " +  findViewById<TextInputEditText>(R.id.ageInput).text.toString(), Toast.LENGTH_SHORT).show()
+            val age : String = findViewById<TextInputEditText>(R.id.ageInput).text.toString()
+            val resultIntent = Intent().apply {
+                putExtra("NAME", name)
+                putExtra("SURNAME", surname)
+                putExtra("AGE", age)
+            }
+            setResult(RESULT_OK, resultIntent)
+            finish()
         }
     }
 }
